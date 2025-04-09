@@ -1,6 +1,7 @@
 import cherrypy
 import bcrypt
 import pymysql
+import os
 from jinja2 import Environment, FileSystemLoader
 
 
@@ -297,6 +298,15 @@ cherrypy_application = cherrypy.Application(AlmacenApp(), '/')
 
 # Ejecutar la aplicación
 if __name__ == "__main__":
+    # Configurar CherryPy para escuchar en 0.0.0.0 y el puerto asignado por Render
+    puerto = int(os.getenv("PORT", 8080))  # Render asigna el puerto en la variable PORT
+    cherrypy.config.update({
+        'server.socket_host': '0.0.0.0',
+        'server.socket_port': puerto,
+        'tools.sessions.on': True,
+        'tools.sessions.storage_type': "ram",
+        'tools.json_in.force': False,
+    })
     app = AlmacenApp()
     app.iniciar()
-    cherrypy.quickstart(app, "/", "config.conf")
+    cherrypy.quickstart(app)
