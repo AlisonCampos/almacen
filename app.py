@@ -5,10 +5,10 @@ from jinja2 import Environment, FileSystemLoader
 
 
 DB_CONFIG = {
-    "host": "localhost",
-    "user": "root",
-    "password": "1234",
-    "database": "almacendb"
+    "host": "sql10.freesqldatabase.com",
+    "user": "sql10772124",
+    "password": "ysP9kFIBzA",
+    "database": "sql10772124"
 }
 
 def conectar_db():
